@@ -1,0 +1,2 @@
+[15-Mar-2022 23:27:20 America/Chicago] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.28. in /home4/buonaods/ayubowantours.alephaz.com/vendor/composer/platform_check.php on line 24
+[15-Mar-2022 23:27:57 America/Chicago] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.28. in /home4/buonaods/ayubowantours.alephaz.com/vendor/composer/platform_check.php on line 24

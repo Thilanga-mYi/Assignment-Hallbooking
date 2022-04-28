@@ -15,9 +15,23 @@ class CreateLecturesTable extends Migration
     {
         Schema::create('lectures', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('lecture_category_id');
+            $table->integer('lecture_hall_id');
+            $table->integer('lecture_type')->default(1);
+            $table->enum('day', ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])->nullable();
+            $table->date('conduct_date')->nullable();
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->integer('student_capcity');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
+
+    // LECTURE TYPES: ------------------------------------------------------------
+    // 1 => Day to Day Lecture
+    // 2 => Special Lecture
 
     /**
      * Reverse the migrations.

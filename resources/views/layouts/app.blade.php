@@ -5,10 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description"
-        content="Airport Travelling Point Of Sales System">
-    <meta name="keywords"
-        content="pos system, airport, airport pos system, alephaz, alephaz.com">
+    <meta name="description" content="Airport Travelling Point Of Sales System">
+    <meta name="keywords" content="pos system, airport, airport pos system, alephaz, alephaz.com">
     <meta name="author" content="ALEPHAZ">
     <title>{{ env('APP_NAME') }}</title>
     <link rel="apple-touch-icon" href="{{ asset('assets/app-assets/images/logo/logo.png') }}">
@@ -62,26 +60,30 @@
             white-space: nowrap;
         }
 
-        .select2-selection__clear{
+        .select2-selection__clear {
             color: red !important;
-            margin-top:1.7px;
+            margin-top: 1.7px;
         }
 
-        .parent{
+        .parent {
             height: 100vh;
         }
-        .parent>.row{
+
+        .parent>.row {
             display: flex;
             align-items: center;
             height: 100%;
         }
-        .imgbgchk:checked + label>.tick_container{
+
+        .imgbgchk:checked+label>.tick_container {
             opacity: 1;
         }
-        .imgbgchk:checked + label>img{
+
+        .imgbgchk:checked+label>img {
             transform: scale(1.0);
             opacity: 0.3;
         }
+
         .tick_container {
             transition: .5s ease;
             opacity: 0;
@@ -93,6 +95,7 @@
             cursor: pointer;
             text-align: center;
         }
+
         .tick {
             background-color: #4CAF50;
             color: white;
@@ -101,6 +104,25 @@
             height: 40px;
             width: 40px;
             border-radius: 100%;
+        }
+
+
+        .ui_kit_checkbox.selectable-list {
+            -webkit-columns: 2;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .custom-control {
+            position: relative;
+            display: block;
+            min-height: 1.5rem;
+            padding-left: 1.5rem;
         }
 
     </style>

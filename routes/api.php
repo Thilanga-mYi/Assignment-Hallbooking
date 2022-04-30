@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TicketReasonController;
+use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 

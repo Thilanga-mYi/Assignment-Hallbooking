@@ -16,11 +16,14 @@ class CreateTransportsTable extends Migration
         Schema::create('transports', function (Blueprint $table) {
             $table->id();
             $table->string('vehicle_no');
+            $table->date('date');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->string('start_location');
             $table->string('end_location');
-            $table->string('route_description');
-            $table->string('remark');
-            $table->tinyInteger('status');
+            $table->string('route_description')->nullable();
+            $table->string('remark')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

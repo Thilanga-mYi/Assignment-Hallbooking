@@ -21,14 +21,13 @@ class CreateTransportHasRidesTable extends Migration
             $table->date('transport_date')->nullable();
             $table->time('in_time');
             $table->time('out_time')->nullable();
-            $table->integer('booking_count');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
 
     // TRANSPORT TYPES: ------------------------------------------------------------------------------------------
-    // 1 => Daily Transport
+    // 1 => Normal Transport
     // 2 => Special Transport
 
     /**

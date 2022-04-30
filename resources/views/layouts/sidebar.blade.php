@@ -7,8 +7,8 @@
                 </li>
                 @if (doPermitted('//subjects') || doPermitted('//events'))
                     <li class=" nav-item"><a href="#"><i class="
-                        la la-bookmark-o"></i><span class="menu-title"
-                                data-i18n="Pages">Enrollment</span></a>
+                        la la-bookmark-o"></i><span
+                                class="menu-title" data-i18n="Pages">Enrollment</span></a>
                         <ul class="menu-content">
                             @if (doPermitted('//subjects'))
                                 <li class=" nav-item"><a href="/subjects"><i class="la la-area-chart"></i><span
@@ -24,9 +24,34 @@
                                 </li>
                             @endif
 
-                             @if (doPermitted('//timetable'))
-                                <li class=" nav-item"><a href="/timetable"><i class="bi bi-calendar-week"></i>                                    <span
-                                            class="menu-title" data-i18n="Apps">Timetable</span></a>
+                            @if (doPermitted('//university'))
+                                <li class=" nav-item">
+                                    <a href="/university">
+                                        <i class="la la-bank"></i>
+                                        <span class="menu-title" data-i18n="Apps">Universities
+                                        </span>
+                                    </a>
+
+                                </li>
+                            @endif
+
+                            @if (doPermitted('//transport'))
+                                <li class=" nav-item">
+                                    <a href="/transport">
+                                        <i class="la la-subway"></i>
+                                        <span class="menu-title" data-i18n="Apps">Transport
+                                        </span>
+                                    </a>
+
+                                </li>
+                            @endif
+
+                            @if (doPermitted('//timetable'))
+                                <li class=" nav-item">
+                                    <a href="/timetable">
+                                        <i class="la la-calendar-check-o"></i>
+                                        <span class="menu-title" data-i18n="Apps">Timetable</span>
+                                    </a>
 
                                 </li>
                             @endif

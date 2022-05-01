@@ -29,104 +29,208 @@
                                         <table class="table w-100" id="dataTable">
                                             <thead>
                                                 <tr>
-                                                    <th>Title</th>
-                                                    <th>Time Schedule</th>
+                                                    <th>Slot Name</th>
+                                                    <th>Subject</th>
+                                                    <th>Lecture Hall</th>
+                                                    <th>Date</th>
+                                                    <th>Start Time</th>
+                                                    <th>End Time</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                         </table>
                                     </div>
+
+
+                                    {{-- <div id='calendar'></div> --}}
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <form autocomplete="off" action="{{ route('admin.events.enroll') }}" method="POST"
+                        <form autocomplete="off" action="{{ route('admin.timetable.ENROLL') }}" method="POST"
                             id="form_records">
                             @csrf
                             <input type="hidden" id="isnew" name="isnew" value="{{ old('isnew') ? old('isnew') : '1' }}">
                             <input type="hidden" id="record" name="record"
                                 value="{{ old('record') ? old('record') : '' }}">
                             <div class="card">
+
                                 <div class="card-header">
                                     <h4 class="card-title">Add/Edit Timetable Slots</h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
-                                            <li><label for="resetbtn"><a data-action="reload"><i
-                                                            class="ft-rotate-cw"></i></a></label></li>
+                                            <li>
+                                                <label for="resetbtn">
+                                                    <a data-action="reload">
+                                                        <i class="ft-rotate-cw"></i>
+                                                    </a>
+                                                </label>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
+
                                 <div class="card-content collapse show">
                                     <div class="card-body pt-0">
                                         <div class="row">
                                             <div class="col-md-12">
+
+                                                {{-- SLOT NAME --}}
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <label for="name"><small class="text-dark">Slot
-                                                                Title{!! required_mark() !!}</small></label>
-                                                        <input value="{{ old('name') }}" type="text" name="title" id="title"
-                                                            class="form-control" placeholder="Enter event title ..">
-                                                        @error('title')
+                                                        <label for="t_slot_name">
+                                                            <small class="text-dark">
+                                                                Slot Name
+                                                                {!! required_mark() !!}
+                                                            </small>
+                                                        </label>
+
+                                                        <input value="{{ old('t_slot_name') }}" type="text"
+                                                            name="t_slot_name" id="t_slot_name" class="form-control"
+                                                            placeholder="Enter slot name ..">
+                                                        @error('t_slot_name')
                                                             <span
                                                                 class="text-danger"><small>{{ $message }}</small></span>
                                                         @enderror
                                                     </div>
                                                 </div>
+
+                                                {{-- LECTURE HALL --}}
                                                 <div class="row mt-1">
                                                     <div class="col-md-12">
-                                                        <label for="name"><small class="text-dark">Slot
-                                                                Description{!! required_mark() !!}</small></label>
-                                                        <textarea placeholder="Enter event description .." class="form-control" name="description" id="description"
-                                                            cols="30" rows="5">{{ old('description') }}</textarea>
-                                                        @error('description')
-                                                            <span
-                                                                class="text-danger"><small>{{ $message }}</small></span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-1">
-                                                    <div class="col-md-12">
-                                                        <label for="start"><small class="text-dark">Slot Subject{!! required_mark() !!}</small></label>
-                                                        <select class="form-control" name="subject" id="subject">
+
+                                                        <label for="t_lecture_hall_id">
+                                                            <small class="text-dark">
+                                                                Lecture Hall
+                                                                {!! required_mark() !!}
+                                                            </small>
+                                                        </label>
+
+                                                        <select class="form-control" name="t_lecture_hall_id"
+                                                            id="t_lecture_hall_id">
                                                             <option selected disabled value="none">- Select -</option>
-                                                            @foreach ($subjects as $subject)
-                                                                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                                            @foreach ($lecture_halls as $lecture_hall)
+                                                                <option value="{{ $lecture_hall->id }}">
+                                                                    {{ $lecture_hall->lecture_hall_name }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
-                                                        @error('start')
+                                                        @error('t_lecture_hall_id')
                                                             <span
                                                                 class="text-danger"><small>{{ $message }}</small></span>
                                                         @enderror
                                                     </div>
                                                 </div>
+
+                                                {{-- SUBJECTS --}}
                                                 <div class="row mt-1">
                                                     <div class="col-md-12">
-                                                        <label for="end"><small class="text-dark">Event
-                                                                End At{!! required_mark() !!}</small></label>
-                                                        <input value="{{ old('end') }}" type="datetime-local" name="end" id="end"
-                                                            class="form-control" placeholder="Enter event end date & time ..">
-                                                        @error('end')
+
+                                                        <label for="t_subject_id">
+                                                            <small class="text-dark">
+                                                                Slot Subject
+                                                                {!! required_mark() !!}
+                                                            </small>
+                                                        </label>
+
+                                                        <select class="form-control" name="t_subject_id"
+                                                            id="t_subject_id">
+                                                            <option selected disabled value="none">- Select -</option>
+                                                            @foreach ($subjects as $subject)
+                                                                <option value="{{ $subject->id }}">{{ $subject->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('t_subject_id')
                                                             <span
                                                                 class="text-danger"><small>{{ $message }}</small></span>
                                                         @enderror
                                                     </div>
                                                 </div>
+
+                                                {{-- DATE --}}
                                                 <div class="row mt-1">
                                                     <div class="col-md-12">
-                                                        <label for="status"><small>Status
-                                                                {!! required_mark() !!}</small></label>
-                                                        <select class="form-control" name="status" id="status">
-                                                            <option {{ old('status') == 1 ? 'selected' : '' }} value="1">
+                                                        <label for="end">
+                                                            <small class="text-dark">Date
+                                                                {!! required_mark() !!}
+                                                            </small>
+                                                        </label>
+                                                        <input value="{{ old('t_date') }}" type="date" name="t_date"
+                                                            id="t_date" class="form-control">
+                                                        @error('t_date')
+                                                            <span class="text-danger">
+                                                                <small>{{ $message }}</small>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    {{-- START TIME --}}
+                                                    <div class="col-md-6 mt-1 p-0">
+                                                        <div class="col-md-12">
+                                                            <label for="end">
+                                                                <small class="text-dark">Start Time
+                                                                    {!! required_mark() !!}
+                                                                </small>
+                                                            </label>
+                                                            <input value="{{ old('t_start_time') }}" type="time"
+                                                                name="t_start_time" id="t_start_time"
+                                                                class="form-control">
+                                                            @error('t_start_time')
+                                                                <span class="text-danger">
+                                                                    <small>{{ $message }}</small>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- END TIME --}}
+                                                    <div class="col-md-6 mt-1 p-0">
+                                                        <div class="col-md-12">
+                                                            <label for="end">
+                                                                <small class="text-dark">End Time
+                                                                    {!! required_mark() !!}
+                                                                </small>
+                                                            </label>
+                                                            <input value="{{ old('t_end_time') }}" type="time"
+                                                                name="t_end_time" id="t_end_time" class="form-control">
+                                                            @error('t_end_time')
+                                                                <span class="text-danger">
+                                                                    <small>{{ $message }}</small>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {{-- STATUS --}}
+                                                <div class="row mt-1">
+                                                    <div class="col-md-12">
+                                                        <label for="t_status">
+                                                            <small>
+                                                                Status
+                                                                {!! required_mark() !!}
+                                                            </small>
+                                                        </label>
+
+                                                        <select class="form-control" name="t_status" id="t_status">
+                                                            <option {{ old('t_status') == 1 ? 'selected' : '' }}
+                                                                value="1">
                                                                 Active
                                                             </option>
-                                                            <option {{ old('status') == 2 ? 'selected' : '' }} value="2">
+                                                            <option {{ old('t_status') == 2 ? 'selected' : '' }}
+                                                                value="2">
                                                                 Inactive
                                                             </option>
                                                         </select>
-                                                        @error('status')
+                                                        @error('t_status')
                                                             <span class="text-danger">
                                                                 <small>{{ $message }}</small>
                                                             </span>
@@ -164,6 +268,14 @@
     @include('layouts.footer')
     @include('layouts.scripts')
     <script>
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     var calendarEl = document.getElementById('calendar');
+        //     var calendar = new FullCalendar.Calendar(calendarEl, {
+        //         initialView: 'dayGridMonth'
+        //     });
+        //     calendar.render();
+        // });
+
         let listTable = $('#dataTable').DataTable({
             lengthMenu: [
                 [10, 25, 50, -1],
@@ -174,13 +286,24 @@
             language: {
                 searchPlaceholder: "Search By Name"
             },
-            ajax: "{{ route('admin.events.list') }}",
-            columns: [
-                {
-                    name: 'title'
+            ajax: "{{ route('admin.timetable.LIST') }}",
+            columns: [{
+                    name: 'slot_name'
                 },
                 {
-                    name: 'start'
+                    name: 'subject_id'
+                },
+                {
+                    name: 'lecture_hall_id'
+                },
+                {
+                    name: 'date'
+                },
+                {
+                    name: 'start_time'
+                },
+                {
+                    name: 'end_time'
                 },
                 {
                     name: 'status',
@@ -202,13 +325,17 @@
             showAlert('Are you sure to edit this record ?', function() {
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('admin.events.get.one') }}",
+                    url: "{{ route('admin.timetable.GET') }}",
                     data: {
                         'id': id
                     },
                     success: function(response) {
-                        $('#name').val(response.name);
-                        $('#description').val(response.description);
+                        $('#t_slot_name').val(response.slot_name);
+                        $('#t_subject_id').val(response.subject_id);
+                        $('#t_lecture_hall_id').val(response.lecture_hall_id);
+                        $('#t_date').val(response.date);
+                        $('#t_start_time').val(response.start_time);
+                        $('#t_end_time').val(response.end_time);
                         $('#status').val(response.status);
                         $('#record').val(response.id);
                         $('#isnew').val('2').trigger('change');

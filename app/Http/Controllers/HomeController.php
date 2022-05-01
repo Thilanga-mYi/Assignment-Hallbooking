@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Driver;
 use App\Models\Invoice;
+use App\Models\LectureHall;
+use App\Models\Subject;
 use App\Models\Ticket;
+use App\Models\Timetable;
 use App\Models\User;
 use App\Models\VehicleType;
 use Carbon\Carbon;
@@ -32,34 +35,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $officersCount = 0;
-        $ticketsCount = 0;
-        $pendingCount = 0;
 
-        $date = Carbon::now()->timezone('Asia/Colombo')->subDays(10)->format('Y-m-d');
+        $calenderData = [];
 
-        $lastTenTickets = [];
-
-        $dates = [];
-        $tickets = [];
-
-        foreach ($lastTenTickets as $key => $value) {
-            $check = false;
-            $index = 0;
-
-            if(array_key_exists($value->created_at->timezone('Asia/Colombo')->format('Y-m-d'),$tickets)){
-                $tickets[$value->created_at->timezone('Asia/Colombo')->format('Y-m-d')]=$tickets[$value->created_at->timezone('Asia/Colombo')->format('Y-m-d')]+ $value->grand_total;
-            }else{
-                $tickets[$value->created_at->timezone('Asia/Colombo')->format('Y-m-d')]=$value['ticketdata']->ticket_value;
-            }
+        foreach (Timetable::orderBy('date', 'DESC')->get() as $key => $slot) {
+            $start=Carbon::parse($slot->date . ' ' . $slot->start_time);
+            $end=Carbon::parse($slot->date . ' ' . $slot->end_time);
+            $calenderData[] = ['title' => $slot->slot_name . ' ( ' . Subject::find($slot->subject_id)->name . ' )', 'start' =>  $start->format('Y-m-d').'T'.$start->format('h:m:s') , 'end' => $end->format('Y-m-d').'T'.$end->format('h:m:s')];
         }
 
-        $dates=array_keys($tickets);
-        $tickets=array_values($tickets);
-
-        $dates = array_reverse($tickets);
-        $tickets = array_reverse($tickets);
-
-        return view('home',compact(['officersCount','ticketsCount','pendingCount','dates','tickets']));
+        return view('home', compact('calenderData'));
     }
 }

@@ -303,7 +303,6 @@
     </div>
     </div>
 
-
     @include('layouts.footer')
     @include('layouts.scripts')
 
@@ -394,4 +393,5 @@
             $('#isnew').val({{ old('isnew') }}).trigger('change');
         @endif
     </script>
+
 @endsection

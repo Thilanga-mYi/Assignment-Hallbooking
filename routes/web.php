@@ -55,13 +55,13 @@ Route::prefix('/events')->group(function () {
     Route::get('/delete', [EventController::class, 'deleteOne'])->name('admin.events.delete.one')->middleware(['auth']);
 });
 
-Route::prefix('/timetable')->group(function () {
-    Route::get('/', [TimetableController::class, 'index'])->middleware(['auth', 'permitted']);
-    Route::post('/enroll', [TimetableController::class, 'enroll'])->name('admin.timetable.enroll')->middleware(['auth']);
-    Route::get('/list', [TimetableController::class, 'list'])->name('admin.timetable.list')->middleware(['auth']);
-    Route::get('/get', [TimetableController::class, 'getOne'])->name('admin.timetable.get.one')->middleware(['auth']);
-    Route::get('/delete', [TimetableController::class, 'deleteOne'])->name('admin.timetable.delete.one')->middleware(['auth']);
-});
+// Route::prefix('/timetable')->group(function () {
+//     Route::get('/', [TimetableController::class, 'index'])->middleware(['auth', 'permitted']);
+//     Route::post('/enroll', [TimetableController::class, 'enroll'])->name('admin.timetable.enroll')->middleware(['auth']);
+//     Route::get('/list', [TimetableController::class, 'list'])->name('admin.timetable.list')->middleware(['auth']);
+//     Route::get('/get', [TimetableController::class, 'getOne'])->name('admin.timetable.get.one')->middleware(['auth']);
+//     Route::get('/delete', [TimetableController::class, 'deleteOne'])->name('admin.timetable.delete.one')->middleware(['auth']);
+// });
 
 Route::prefix('/university')->group(function () {
     Route::get('/', [UniversityController::class, 'index'])->middleware(['auth', 'permitted']);
@@ -93,4 +93,12 @@ Route::prefix('/lecture')->group(function () {
     Route::get('/list', [LectureController::class, 'list'])->name('admin.lecture.LIST')->middleware(['auth']);
     Route::get('/get', [LectureController::class, 'getOne'])->name('admin.lecture.GET')->middleware(['auth']);
     Route::get('/delete', [LectureController::class, 'deleteOne'])->name('admin.lecture.DELETE')->middleware(['auth']);
+});
+
+Route::prefix('/timetable')->group(function () {
+    Route::get('/', [TimetableController::class, 'index'])->middleware(['auth', 'permitted']);
+    Route::post('/enroll', [TimetableController::class, 'enroll'])->name('admin.timetable.ENROLL')->middleware(['auth']);
+    Route::get('/list', [TimetableController::class, 'list'])->name('admin.timetable.LIST')->middleware(['auth']);
+    Route::get('/get', [TimetableController::class, 'getOne'])->name('admin.timetable.GET')->middleware(['auth']);
+    Route::get('/delete', [TimetableController::class, 'deleteOne'])->name('admin.timetable.DELETE')->middleware(['auth']);
 });

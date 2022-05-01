@@ -77,6 +77,15 @@
                                 </li>
                             @endif
 
+                            @if (doPermitted('//payments'))
+                                <li class=" nav-item">
+                                    <a href="/payments">
+                                        <i class="la la-calendar-check-o"></i>
+                                        <span class="menu-title" data-i18n="Apps">Payments</span>
+                                    </a>
+                                </li>
+                            @endif
+
                         </ul>
                     </li>
 

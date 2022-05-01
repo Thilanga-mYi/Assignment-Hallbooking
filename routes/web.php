@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LectureController;
 use App\Http\Controllers\LectureHallController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTypeController;
 use App\Http\Controllers\SubjectController;
@@ -18,7 +20,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'permitted']);
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'permitted']);
+Route::get('/home/eventList', [HomeController::class, 'eventsList'])->name('admin.dashboard.events.list')->middleware(['auth']);
+Route::get('/home/lectureList', [HomeController::class, 'lecturesList'])->name('admin.dashboard.lecture.list')->middleware(['auth']);
 
 Route::get('/logout', [UserController::class, 'logout'])->name('admin.logout');
 
@@ -54,14 +58,6 @@ Route::prefix('/events')->group(function () {
     Route::get('/get', [EventController::class, 'getOne'])->name('admin.events.get.one')->middleware(['auth']);
     Route::get('/delete', [EventController::class, 'deleteOne'])->name('admin.events.delete.one')->middleware(['auth']);
 });
-
-// Route::prefix('/timetable')->group(function () {
-//     Route::get('/', [TimetableController::class, 'index'])->middleware(['auth', 'permitted']);
-//     Route::post('/enroll', [TimetableController::class, 'enroll'])->name('admin.timetable.enroll')->middleware(['auth']);
-//     Route::get('/list', [TimetableController::class, 'list'])->name('admin.timetable.list')->middleware(['auth']);
-//     Route::get('/get', [TimetableController::class, 'getOne'])->name('admin.timetable.get.one')->middleware(['auth']);
-//     Route::get('/delete', [TimetableController::class, 'deleteOne'])->name('admin.timetable.delete.one')->middleware(['auth']);
-// });
 
 Route::prefix('/university')->group(function () {
     Route::get('/', [UniversityController::class, 'index'])->middleware(['auth', 'permitted']);
@@ -102,3 +98,12 @@ Route::prefix('/timetable')->group(function () {
     Route::get('/get', [TimetableController::class, 'getOne'])->name('admin.timetable.GET')->middleware(['auth']);
     Route::get('/delete', [TimetableController::class, 'deleteOne'])->name('admin.timetable.DELETE')->middleware(['auth']);
 });
+
+Route::prefix('/payments')->group(function () {
+    Route::get('/', [PaymentController::class, 'index'])->middleware(['auth', 'permitted']);
+    Route::post('/enroll', [PaymentController::class, 'enroll'])->name('admin.payments.ENROLL')->middleware(['auth']);
+    Route::get('/list', [PaymentController::class, 'list'])->name('admin.payments.LIST')->middleware(['auth']);
+    Route::get('/get', [PaymentController::class, 'getOne'])->name('admin.payments.GET')->middleware(['auth']);
+    Route::get('/delete', [PaymentController::class, 'deleteOne'])->name('admin.payments.DELETE')->middleware(['auth']);
+});
+

@@ -41,8 +41,6 @@ class EventController extends Controller
             Event::create($data);
         } else {
 
-            dd($request->all());
-
             $request->validate([
                 'record' => 'required|numeric|exists:events,id'
             ]);

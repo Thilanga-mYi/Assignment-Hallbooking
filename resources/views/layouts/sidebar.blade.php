@@ -46,6 +46,27 @@
                                 </li>
                             @endif
 
+                            @if (doPermitted('//lecture_hall'))
+                                <li class="nav-item">
+                                    <a href="/lecture_hall">
+                                        <i class="la la-institution"></i>
+                                        <span class="menu-title" data-i18n="Apps">Lecture Hall
+                                        </span>
+                                    </a>
+
+                                </li>
+                            @endif
+
+                            @if (doPermitted('//lecture'))
+                                <li class=" nav-item">
+                                    <a href="/lecture">
+                                        <i class="la la-graduation-cap"></i>
+                                        <span class="menu-title" data-i18n="Apps">Lecture</span>
+                                    </a>
+
+                                </li>
+                            @endif
+
                             @if (doPermitted('//timetable'))
                                 <li class=" nav-item">
                                     <a href="/timetable">
@@ -55,6 +76,7 @@
 
                                 </li>
                             @endif
+
                         </ul>
                     </li>
 

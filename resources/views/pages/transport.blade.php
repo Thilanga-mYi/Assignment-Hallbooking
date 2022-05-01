@@ -106,8 +106,8 @@
                                                                     Date{!! required_mark() !!}
                                                                 </small>
                                                             </label>
-                                                            <input value="{{ old('trans_date') }}" type="datetime-local"
-                                                                name="trans_date" id="end" class="form-control">
+                                                            <input value="{{ old('trans_date') }}" type="date"
+                                                                name="trans_date" id="trans_date" class="form-control">
                                                             @error('trans_date')
                                                                 <span
                                                                     class="text-danger"><small>{{ $message }}</small></span>

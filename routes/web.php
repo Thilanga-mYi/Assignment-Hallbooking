@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\LectureController;
 use App\Http\Controllers\LectureHallController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTypeController;
@@ -84,4 +85,12 @@ Route::prefix('/lecture_hall')->group(function () {
     Route::get('/list', [LectureHallController::class, 'list'])->name('admin.lecture_hall.LIST')->middleware(['auth']);
     Route::get('/get', [LectureHallController::class, 'getOne'])->name('admin.lecture_hall.GET')->middleware(['auth']);
     Route::get('/delete', [LectureHallController::class, 'deleteOne'])->name('admin.lecture_hall.DELETE')->middleware(['auth']);
+});
+
+Route::prefix('/lecture')->group(function () {
+    Route::get('/', [LectureController::class, 'index'])->middleware(['auth', 'permitted']);
+    Route::post('/enroll', [LectureController::class, 'enroll'])->name('admin.lecture.ENROLL')->middleware(['auth']);
+    Route::get('/list', [LectureController::class, 'list'])->name('admin.lecture.LIST')->middleware(['auth']);
+    Route::get('/get', [LectureController::class, 'getOne'])->name('admin.lecture.GET')->middleware(['auth']);
+    Route::get('/delete', [LectureController::class, 'deleteOne'])->name('admin.lecture.DELETE')->middleware(['auth']);
 });

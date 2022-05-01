@@ -94,7 +94,7 @@
                                                     <div class="col-md-12">
                                                         <label for="start"><small class="text-dark">Event
                                                                 Start At{!! required_mark() !!}</small></label>
-                                                        <input value="{{ old('start') }}" type="datetime-local"
+                                                        <input value="{{ old('start') }}" type="date"
                                                             name="start" id="start" class="form-control"
                                                             placeholder="Enter event start date & time ..">
                                                         @error('start')
@@ -107,7 +107,7 @@
                                                     <div class="col-md-12">
                                                         <label for="end"><small class="text-dark">Event
                                                                 End At{!! required_mark() !!}</small></label>
-                                                        <input value="{{ old('end') }}" type="datetime-local" name="end"
+                                                        <input value="{{ old('end') }}" type="date" name="end"
                                                             id="end" class="form-control"
                                                             placeholder="Enter event end date & time ..">
                                                         @error('end')

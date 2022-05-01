@@ -23,7 +23,7 @@ class CreateLecturesTable extends Migration
             $table->date('conduct_date')->nullable();
             $table->time('start_time');
             $table->time('end_time');
-            $table->integer('student_capcity');
+            $table->integer('student_capacity');
             $table->tinyInteger('status');
             $table->timestamps();
         });

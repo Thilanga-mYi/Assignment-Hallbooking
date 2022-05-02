@@ -96,11 +96,13 @@
 
                                                 <div class="row mt-1">
                                                     <div class="col-md-12">
+                                                        
                                                         <label for="payment_status">
                                                             <small>Status
                                                                 {!! required_mark() !!}
                                                             </small>
                                                         </label>
+
                                                         <select class="form-control" name="payment_status"
                                                             id="payment_status">
                                                             <option {{ old('payment_status') == 1 ? 'selected' : '' }}
@@ -111,6 +113,10 @@
                                                                 value="2">
                                                                 Rejected
                                                             </option>
+                                                            <option {{ old('payment_status') == 3 ? 'selected' : '' }}
+                                                                value="3">
+                                                                Pending
+                                                            </option>
                                                         </select>
 
                                                         @error('payment_status')
@@ -118,6 +124,7 @@
                                                                 <small>{{ $message }}</small>
                                                             </span>
                                                         @enderror
+
                                                     </div>
                                                 </div>
 

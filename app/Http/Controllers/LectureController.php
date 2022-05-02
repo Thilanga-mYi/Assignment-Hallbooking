@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lecture;
 use App\Models\LectureHall;
+use App\Models\Payment;
 use Freshbitsweb\Laratables\Laratables;
 use Illuminate\Http\Request;
 
@@ -116,5 +117,17 @@ class LectureController extends Controller
                 'msg' => 'Lecture Successfully Removed',
             ]
         );
+    }
+
+    public function getEnrolledStudents(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|numeric|exists:payments,id',
+        ]);
+
+        return Payment::where('status', [1, 2])
+            ->where('lecture_id', $request->id)
+            ->with('getStudent')
+            ->get();
     }
 }

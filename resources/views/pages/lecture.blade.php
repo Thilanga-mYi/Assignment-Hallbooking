@@ -19,7 +19,7 @@
                         <div class="card">
 
                             <div class="card-header">
-                                <h4 class="card-title">Lecture Hall List</h4>
+                                <h4 class="card-title">Lectures List</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -38,6 +38,7 @@
                                         <table class="table w-100" id="lecture_dataTable">
                                             <thead>
                                                 <tr>
+                                                    {{-- <th></th> --}}
                                                     <th>Lecture Hall</th>
                                                     <th>Lecture Name</th>
                                                     <th>Type</th>
@@ -303,6 +304,39 @@
     </div>
     </div>
 
+    <div id="lecture_enrolled_student_list_modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Lecture Enrolled Students</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="table-responsive">
+                        <table class="table w-100" id="lecture_enrolled_dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lecture_enrolled_dataTable_body">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @include('layouts.footer')
     @include('layouts.scripts')
 
@@ -318,7 +352,13 @@
                 searchPlaceholder: "Search By Name"
             },
             ajax: "{{ route('admin.lecture.LIST') }}",
-            columns: [{
+            columns: [
+                // {
+                //     name: 'viewenrolled',
+                //     orderable: false,
+                //     searchable: false
+                // },
+                {
                     name: 'lecture_hall_id'
                 },
                 {
@@ -385,6 +425,41 @@
             });
         }
 
+        function doViewEnreolledStudents(lecture_id) {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('admin.lecture.GET_ENROLLED_STUDENTS') }}",
+                data: {
+                    id: lecture_id
+                },
+
+                success: function(response) {
+
+                    let table_data = '';
+
+                    $('#lecture_enrolled_student_list_modal').modal('toggle');
+                    $('#lecture_enrolled_dataTable_body').html('');
+
+                    $.each(response, function(key, value) {
+
+                        let status = '';
+
+                        if (value['status'] == 1) {
+                            status = 'APPROVED'
+                        } else {
+                            'APPROVAL PENDING'
+                        }
+
+                        $('#lecture_enrolled_dataTable_body').append(
+                            '<tr>' +
+                            '<td>' + value['get_student']['name'] + '</td>' +
+                            '<td>' + status + '</td>' +
+                            '</tr>');
+                    });
+                }
+            });
+        }
+
         @if (old('record'))
             $('#record').val({{ old('record') }});
         @endif
@@ -393,5 +468,4 @@
             $('#isnew').val({{ old('isnew') }}).trigger('change');
         @endif
     </script>
-
 @endsection

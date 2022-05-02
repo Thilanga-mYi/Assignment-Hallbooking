@@ -88,6 +88,7 @@ Route::prefix('/lecture')->group(function () {
     Route::post('/enroll', [LectureController::class, 'enroll'])->name('admin.lecture.ENROLL')->middleware(['auth']);
     Route::get('/list', [LectureController::class, 'list'])->name('admin.lecture.LIST')->middleware(['auth']);
     Route::get('/get', [LectureController::class, 'getOne'])->name('admin.lecture.GET')->middleware(['auth']);
+    Route::get('/getEnrolledStudents', [LectureController::class, 'getEnrolledStudents'])->name('admin.lecture.GET_ENROLLED_STUDENTS')->middleware(['auth']);
     Route::get('/delete', [LectureController::class, 'deleteOne'])->name('admin.lecture.DELETE')->middleware(['auth']);
 });
 

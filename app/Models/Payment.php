@@ -18,7 +18,7 @@ class Payment extends Model
         'status',
     ];
 
-    public static $status = [1 => 'Approved', 2 => 'Rejected', 3 => 'Blocked', 4 => 'Deleted'];
+    public static $status = [1 => 'Approved', 2 => 'Rejected', 3 => 'Pending', 4 => 'Deleted'];
 
     public static function laratablesStatus($payment)
     {
@@ -37,6 +37,11 @@ class Payment extends Model
 
     public static function laratablesQueryConditions($query)
     {
-        return $query->whereIn('status', [1, 2]);
+        return $query->whereIn('status', [1, 2, 3]);
+    }
+
+    public function getStudent()
+    {
+        return $this->hasOne(User::class, 'id', 'student_id');
     }
 }

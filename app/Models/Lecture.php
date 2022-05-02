@@ -30,9 +30,18 @@ class Lecture extends Model
         return '<span class="badge badge-' . (new Colors)->getColor($lecture['status']) . '">' . self::$status[$lecture['status']] . '</span>';
     }
 
+    // public static function laratablesCustomViewenrolled($lecture)
+    // {
+    //     return '<i onclick="doViewEnreolledStudents(' . $lecture['id'] . ')" class="la la-eye ml1 text-primary"></i>';
+    // }
+
     public static function laratablesCustomAction($lecture)
     {
-        return '<i onclick="doEdit(' . $lecture['id'] . ')" class="la la-edit ml1 text-warning"></i><i onclick="doDelete(' . $lecture['id'] . ')" class="la la-trash ml-1 text-danger"></i>';
+        return '<i onclick="doViewEnreolledStudents(' . $lecture['id'] . ')" class="la la-eye ml1 pr-2 text-primary"></i>' .
+            '<i onclick="doEdit(' . $lecture['id'] . ')" class="la la-edit ml1 text-warning">' .
+            '</i>' .
+            '<i onclick="doDelete(' . $lecture['id'] . ')" class="la la-trash ml-1 text-danger">' .
+            '</i>';
     }
 
     public static function laratablesSearchableColumns()

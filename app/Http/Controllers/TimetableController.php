@@ -21,7 +21,6 @@ class TimetableController extends Controller
     public function enroll(Request $request)
     {
 
-
         $request->validate([
             't_slot_name' => 'required|string',
             't_subject_id' => 'required|numeric|min:1|exists:subjects,id',

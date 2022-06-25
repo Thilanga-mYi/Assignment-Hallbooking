@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LectureController;
 use App\Http\Controllers\LectureHallController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StudentBookLectureHallController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTypeController;
 use App\Http\Controllers\SubjectController;
@@ -108,3 +109,8 @@ Route::prefix('/payments')->group(function () {
     Route::get('/delete', [PaymentController::class, 'deleteOne'])->name('admin.payments.DELETE')->middleware(['auth']);
 });
 
+Route::prefix('/studentBookLectureHall')->group(function () {
+    Route::get('/', [StudentBookLectureHallController::class, 'index'])->middleware(['auth', 'permitted']);
+    Route::get('/list', [StudentBookLectureHallController::class, 'list'])->name('admin.studentBookedLectureHall.LIST')->middleware(['auth']);
+    Route::get('/changeStatus', [StudentBookLectureHallController::class, 'changeStatus'])->name('admin.studentBookedLectureHall.ChangeStatus')->middleware(['auth']);
+});

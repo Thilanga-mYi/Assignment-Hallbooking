@@ -86,6 +86,17 @@
                                 </li>
                             @endif
 
+                            @if (doPermitted('//studentBookLectureHall'))
+                                <li class=" nav-item">
+                                    <a href="/studentBookLectureHall">
+                                        <i class="la la-calendar-check-o"></i>
+                                        <span class="menu-title" data-i18n="Apps">
+                                            Student Requested Halls
+                                        </span>
+                                    </a>
+                                </li>
+                            @endif
+
                         </ul>
                     </li>
 

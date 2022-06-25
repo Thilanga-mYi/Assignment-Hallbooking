@@ -17,6 +17,7 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
 
 <script>
+    
     $('#isnew').change(function(e) {
         let submitbtn = $('#submitbtn');
         if ($(this).val() == '1') {
